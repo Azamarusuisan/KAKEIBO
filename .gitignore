@@ -1,0 +1,27 @@
+# 環境変数
+.env
+.env.local
+**/.env
+**/.env.local
+
+# 依存関係
+node_modules/
+**/node_modules/
+
+# ビルド成果物
+dist/
+**/dist/
+
+# ログ
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+*.swo
