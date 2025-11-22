@@ -283,28 +283,29 @@ function App() {
         ) : expenses.length > 0 ? (
           <ul className="expense-list">
             {expenses.map((expense) => (
-              <li key={expense.id} className="expense-item">
+              <li key={expense.id} className="expense-item" data-category={expense.category}>
+                <span className="expense-date">{expense.spent_at}</span>
+                <span className={`expense-category ${expense.category}`}></span>
                 <div className="expense-info">
-                  <span className="expense-date">{expense.spent_at}</span>
-                  <span className="expense-category">{expense.category}</span>
-                  <span className="expense-amount">
-                    {expense.amount.toLocaleString()}円
-                  </span>
+                  <span className="expense-category-name">{expense.category}</span>
                   {expense.memo && (
-                    <span className="expense-memo">/ {expense.memo}</span>
+                    <span className="expense-memo">{expense.memo}</span>
                   )}
                 </div>
+                <span className="expense-amount">
+                  ¥{expense.amount.toLocaleString()}
+                </span>
                 <button
                   className="delete-btn"
                   onClick={() => handleDelete(expense.id)}
                 >
-                  削除
+                  ✕
                 </button>
               </li>
             ))}
           </ul>
         ) : (
-          <div className="no-data">まだデータがありません。</div>
+          <div className="no-data">まだデータがありません</div>
         )}
       </section>
 
