@@ -16,6 +16,8 @@ services:
         sync: false  # Render Dashboard で手動設定
       - key: SUPABASE_SERVICE_KEY
         sync: false  # Render Dashboard で手動設定
+      - key: FRONTEND_URL
+        sync: false  # フロントエンドのURLを設定
     healthCheckPath: /health
 
   # フロントエンド静的サイト
