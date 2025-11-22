@@ -166,22 +166,26 @@ function App() {
       <header className="header">
         <div className="header-top">
           <h1>家計簿</h1>
-          <div className="header-buttons">
-            <button className="settings-btn" onClick={() => setShowSettings(true)}>
-              設定
-            </button>
-            <button className="logout-btn" onClick={handleLogout}>
-              ログアウト
-            </button>
-          </div>
         </div>
         <div className="header-info">
-          {year}年 {month}月 合計：{summary.total.toLocaleString()}円
+          <span className="total">¥{summary.total.toLocaleString()}</span>
           <span className="limit-info">
-            （上限 {settings.monthlyLimit.toLocaleString()}円）
+            {year}年{month}月 / 上限 ¥{settings.monthlyLimit.toLocaleString()}
           </span>
         </div>
       </header>
+
+      {/* メニューカード */}
+      <div className="menu-card">
+        <button className="menu-btn" onClick={() => setShowSettings(true)}>
+          <span className="menu-icon">⚙️</span>
+          <span>設定</span>
+        </button>
+        <button className="menu-btn" onClick={handleLogout}>
+          <span className="menu-icon">🚪</span>
+          <span>ログアウト</span>
+        </button>
+      </div>
 
       {/* ギャンブルトラッカー */}
       <GambleTracker />

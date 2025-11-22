@@ -1,18 +1,41 @@
-/* Google Material Design 風 */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap');
+/* Gemini風 モバイルファーストデザイン */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&display=swap');
 
 :root {
-  --primary: #1a73e8;
-  --primary-dark: #1557b0;
-  --on-primary: #fff;
-  --surface: #fff;
-  --background: #f8f9fa;
-  --on-surface: #202124;
-  --on-surface-variant: #5f6368;
-  --outline: #dadce0;
-  --error: #d93025;
-  --success: #1e8e3e;
-  --warning: #f9ab00;
+  --bg: #131314;
+  --surface: #1e1f20;
+  --surface-container: #252628;
+  --primary: #8ab4f8;
+  --primary-container: #004a77;
+  --secondary: #c2e7ff;
+  --on-surface: #e3e3e3;
+  --on-surface-dim: #9aa0a6;
+  --outline: #3c4043;
+  --error: #f28b82;
+  --success: #81c995;
+  --warning: #fdd663;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+/* ライトモード */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --surface-container: #ffffff;
+    --primary: #1a73e8;
+    --primary-container: #d2e3fc;
+    --secondary: #174ea6;
+    --on-surface: #202124;
+    --on-surface-dim: #5f6368;
+    --outline: #dadce0;
+    --error: #d93025;
+    --success: #1e8e3e;
+    --warning: #f9ab00;
+  }
 }
 
 * {
@@ -22,147 +45,188 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
-  font-family: 'Google Sans', 'Roboto', -apple-system, sans-serif;
-  background: var(--background);
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
   color: var(--on-surface);
-  font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* アプリコンテナ */
 .app {
   min-height: 100vh;
-  max-width: 600px;
-  margin: 0 auto;
-  background: var(--background);
+  min-height: 100dvh;
+  max-width: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
-/* ヘッダー */
+/* ヘッダー - Gemini風 */
 .header {
   background: var(--surface);
-  padding: 16px 20px;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid var(--outline);
 }
 
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .header h1 {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 1.25rem;
+  font-weight: 500;
   color: var(--on-surface);
+  letter-spacing: -0.01em;
 }
 
 .header-buttons {
   display: flex;
-  gap: 4px;
-}
-
-.header-info {
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
   gap: 8px;
 }
 
+.header-info {
+  background: linear-gradient(135deg, var(--primary) 0%, #669df6 100%);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  text-align: center;
+}
+
 .header-info .total {
-  font-size: 32px;
+  font-size: 2.5rem;
   font-weight: 400;
-  color: var(--on-surface);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .limit-info {
-  font-size: 13px;
-  color: var(--on-surface-variant);
+  font-size: 0.875rem;
+  opacity: 0.9;
 }
 
 /* ボタン共通 */
 button {
-  font-family: 'Google Sans', 'Roboto', sans-serif;
-  font-size: 14px;
+  font-family: inherit;
+  font-size: 0.875rem;
   font-weight: 500;
   border: none;
-  border-radius: 20px;
-  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  padding: 12px 24px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  background: var(--surface-container);
+  color: var(--on-surface);
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
 button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* アイコンボタン */
 .settings-btn,
 .logout-btn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--on-surface-variant);
-  font-size: 18px;
+  color: var(--on-surface-dim);
+  font-size: 1.25rem;
 }
 
-.settings-btn:hover,
-.logout-btn:hover {
-  background: rgba(0,0,0,0.04);
+.settings-btn:active,
+.logout-btn:active {
+  background: var(--outline);
 }
 
-/* ギャンブルトラッカー */
-.gamble-tracker {
-  background: linear-gradient(135deg, var(--primary) 0%, #4285f4 100%);
+/* メニューカード */
+.menu-card {
+  background: var(--surface);
   margin: 16px;
-  padding: 24px 20px;
-  border-radius: 16px;
-  color: var(--on-primary);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: 8px;
+}
+
+.menu-btn {
+  flex: 1;
+  background: var(--bg);
+  color: var(--on-surface);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.menu-btn:active {
+  background: var(--outline);
+}
+
+.menu-icon {
+  font-size: 1.25rem;
+}
+
+/* ギャンブルトラッカー - Gemini風カード */
+.gamble-tracker {
+  margin: 16px;
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, #4285f4 0%, #669df6 50%, #8ab4f8 100%);
+  color: #fff;
 }
 
 .gamble-question h3 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   text-align: center;
+  line-height: 1.4;
 }
 
 .gamble-buttons {
   display: flex;
   gap: 12px;
-  justify-content: center;
 }
 
 .btn-no-gamble {
-  background: var(--on-primary);
-  color: var(--primary);
   flex: 1;
-  max-width: 160px;
+  background: #fff;
+  color: #1a73e8;
+  padding: 14px 20px;
+  font-weight: 500;
 }
 
 .btn-yes-gamble {
-  background: rgba(255,255,255,0.15);
-  color: var(--on-primary);
-  border: 1px solid rgba(255,255,255,0.3);
   flex: 1;
-  max-width: 160px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  padding: 14px 20px;
 }
 
 .gamble-success {
@@ -170,62 +234,66 @@ button:disabled {
 }
 
 .streak-count {
-  font-size: 64px;
+  font-size: 4.5rem;
   font-weight: 300;
   line-height: 1;
   margin-bottom: 8px;
+  letter-spacing: -0.04em;
 }
 
 .streak-label {
-  font-size: 16px;
+  font-size: 1rem;
   opacity: 0.9;
 }
 
 .gamble-relapse {
   text-align: center;
-  padding: 8px;
 }
 
 /* 警告 */
 .warning-alert {
   margin: 16px;
   padding: 16px 20px;
-  border-radius: 12px;
-  font-size: 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .warning-alert.danger {
-  background: #fce8e6;
+  background: rgba(242,139,130,0.15);
   color: var(--error);
 }
 
 .warning-alert.warning {
-  background: #fef7e0;
-  color: #b06000;
+  background: rgba(253,214,99,0.15);
+  color: var(--warning);
 }
 
-/* セクション */
+/* セクション - Gemini風カード */
 .section {
   background: var(--surface);
   margin: 16px;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  border-radius: var(--radius-md);
 }
 
 .section h2 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--on-surface);
-  margin-bottom: 16px;
+  color: var(--on-surface-dim);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* フォーム */
+/* フォーム - Gemini風入力 */
 .expense-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-group {
@@ -235,51 +303,66 @@ button:disabled {
 }
 
 .form-group label {
-  font-size: 12px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--on-surface-variant);
+  color: var(--on-surface-dim);
 }
 
 .form-group input,
 .form-group select {
-  padding: 14px 16px;
-  border: 1px solid var(--outline);
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 16px;
+  border: 1.5px solid var(--outline);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
   font-family: inherit;
-  background: var(--surface);
+  background: var(--bg);
   color: var(--on-surface);
-  transition: border-color 0.2s;
+  transition: all 0.2s;
   -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235f6368' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 44px;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+  background: var(--surface-container);
+}
+
+.form-group input::placeholder {
+  color: var(--on-surface-dim);
 }
 
 .expense-form button[type="submit"] {
   background: var(--primary);
-  color: var(--on-primary);
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-size: 15px;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 500;
   margin-top: 8px;
 }
 
-.expense-form button[type="submit"]:hover:not(:disabled) {
-  background: var(--primary-dark);
+@media (prefers-color-scheme: light) {
+  .expense-form button[type="submit"] {
+    color: #fff;
+  }
 }
 
 /* グラフ */
 .chart-container {
-  max-width: 240px;
+  max-width: 200px;
   margin: 0 auto;
 }
 
-/* 支出リスト */
+/* 支出リスト - Gemini風 */
 .expense-list {
   list-style: none;
 }
@@ -287,35 +370,40 @@ button:disabled {
 .expense-item {
   display: flex;
   align-items: center;
-  padding: 14px 0;
-  gap: 12px;
+  padding: 16px 0;
+  gap: 14px;
   border-bottom: 1px solid var(--outline);
 }
 
 .expense-item:last-child {
   border-bottom: none;
+  padding-bottom: 0;
+}
+
+.expense-item:first-child {
+  padding-top: 0;
 }
 
 .expense-date {
-  font-size: 12px;
-  color: var(--on-surface-variant);
-  min-width: 50px;
+  font-size: 0.75rem;
+  color: var(--on-surface-dim);
+  min-width: 48px;
 }
 
 .expense-category {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 /* カテゴリカラー */
-.expense-category.食費 { background: #1a73e8; }
+.expense-category.食費 { background: #4285f4; }
 .expense-category.交際費 { background: #ea4335; }
 .expense-category.交通費 { background: #34a853; }
 .expense-category.趣味 { background: #fbbc04; }
-.expense-category.固定費 { background: #9334e6; }
-.expense-category.その他 { background: #5f6368; }
+.expense-category.固定費 { background: #ab47bc; }
+.expense-category.その他 { background: #78909c; }
 
 .expense-info {
   flex: 1;
@@ -323,130 +411,149 @@ button:disabled {
 }
 
 .expense-category-name {
-  font-size: 14px;
+  font-size: 0.9375rem;
   font-weight: 500;
   color: var(--on-surface);
+  margin-bottom: 2px;
 }
 
 .expense-memo {
-  font-size: 12px;
-  color: var(--on-surface-variant);
+  font-size: 0.8125rem;
+  color: var(--on-surface-dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .expense-amount {
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--on-surface);
   white-space: nowrap;
 }
 
 .delete-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--on-surface-variant);
-  font-size: 16px;
-  opacity: 0.6;
+  color: var(--on-surface-dim);
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
-.delete-btn:hover {
-  background: #fce8e6;
+.delete-btn:active {
+  background: rgba(242,139,130,0.2);
   color: var(--error);
   opacity: 1;
 }
 
-/* 設定モーダル */
+/* 設定モーダル - Gemini風 */
 .settings-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 20px;
   z-index: 1000;
+  padding: 0;
 }
 
 .settings-modal {
   background: var(--surface);
-  border-radius: 16px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   padding: 24px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
   width: 100%;
-  max-width: 360px;
-  max-height: 90vh;
+  max-width: 100%;
+  max-height: 85vh;
   overflow-y: auto;
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .settings-modal h2 {
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 24px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  text-align: center;
 }
 
 .settings-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .settings-form small {
-  font-size: 12px;
-  color: var(--on-surface-variant);
+  font-size: 0.75rem;
+  color: var(--on-surface-dim);
+  margin-top: 6px;
+  display: block;
 }
 
 .settings-buttons {
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .btn-cancel {
+  flex: 1;
   background: transparent;
   color: var(--primary);
+  border: 1.5px solid var(--outline);
 }
 
 .btn-save {
+  flex: 1;
   background: var(--primary);
-  color: var(--on-primary);
+  color: #fff;
 }
 
-/* 認証画面 */
+/* 認証画面 - Gemini風 */
 .auth-container {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: var(--background);
+  background: var(--bg);
 }
 
 .auth-card {
   background: var(--surface);
-  padding: 40px 32px;
-  border-radius: 16px;
+  padding: 40px 28px;
+  border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  max-width: 380px;
 }
 
 .auth-title {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
   margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
 
 .auth-subtitle {
-  font-size: 14px;
-  color: var(--on-surface-variant);
+  font-size: 0.9375rem;
+  color: var(--on-surface-dim);
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 .auth-form {
@@ -457,70 +564,97 @@ button:disabled {
 
 .auth-form button[type="submit"] {
   background: var(--primary);
-  color: var(--on-primary);
-  padding: 14px;
-  border-radius: 8px;
-  margin-top: 8px;
+  color: #fff;
+  padding: 16px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  margin-top: 12px;
 }
 
 .toggle-btn {
   background: transparent;
   color: var(--primary);
-  margin-top: 8px;
+  margin-top: 16px;
+  font-size: 0.9375rem;
 }
 
 /* エラー・ローディング */
 .error {
-  background: #fce8e6;
+  background: rgba(242,139,130,0.15);
   color: var(--error);
-  padding: 16px;
+  padding: 16px 20px;
   margin: 16px;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
 }
 
 .loading,
 .no-data {
   text-align: center;
-  padding: 32px;
-  color: var(--on-surface-variant);
+  padding: 40px 20px;
+  color: var(--on-surface-dim);
+  font-size: 0.9375rem;
 }
 
-/* レスポンシブ */
+.loading::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 16px auto 0;
+  border: 2px solid var(--outline);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* タブレット以上 */
 @media (min-width: 600px) {
   .app {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    border-radius: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    max-width: 480px;
+    margin: 24px auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.08);
     overflow: hidden;
   }
 
   .header {
-    border-radius: 0;
+    padding-top: 20px;
+  }
+
+  .settings-overlay {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .settings-modal {
+    border-radius: var(--radius-lg);
+    max-width: 400px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
 }
 
-@media (max-width: 400px) {
+/* 小さい画面 */
+@media (max-width: 360px) {
   .header h1 {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   .header-info .total {
-    font-size: 28px;
-  }
-
-  .gamble-buttons {
-    flex-direction: column;
-  }
-
-  .btn-no-gamble,
-  .btn-yes-gamble {
-    max-width: 100%;
+    font-size: 2rem;
   }
 
   .streak-count {
-    font-size: 48px;
+    font-size: 3.5rem;
   }
 
   .section {
@@ -528,7 +662,8 @@ button:disabled {
     padding: 16px;
   }
 
-  .expense-item {
-    flex-wrap: wrap;
+  .gamble-tracker {
+    margin: 12px;
+    padding: 24px 20px;
   }
 }
