@@ -56,3 +56,73 @@ export async function getSummary(year, month) {
 
   return response.json();
 }
+
+// 支出を削除
+export async function deleteExpense(id) {
+  const response = await fetch(`${API_BASE}/api/expenses/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error('支出の削除に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ギャンブルトラッカー: ステータス取得
+export async function getGambleStatus() {
+  const response = await fetch(`${API_BASE}/api/gamble/status`, {
+    headers: getAuthHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error('ステータスの取得に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ギャンブルトラッカー: チェックイン
+export async function gambleCheckin(didGamble) {
+  const response = await fetch(`${API_BASE}/api/gamble/checkin`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ did_gamble: didGamble })
+  });
+
+  if (!response.ok) {
+    throw new Error('チェックインに失敗しました');
+  }
+
+  return response.json();
+}
+
+// ユーザー設定: 取得
+export async function getSettings() {
+  const response = await fetch(`${API_BASE}/api/settings`, {
+    headers: getAuthHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error('設定の取得に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ユーザー設定: 更新
+export async function updateSettings(settings) {
+  const response = await fetch(`${API_BASE}/api/settings`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(settings)
+  });
+
+  if (!response.ok) {
+    throw new Error('設定の更新に失敗しました');
+  }
+
+  return response.json();
+}

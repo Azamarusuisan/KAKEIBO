@@ -178,3 +178,233 @@ button:disabled {
   border-radius: 4px;
   margin-bottom: 20px;
 }
+
+/* ヘッダーボタン */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.settings-btn,
+.logout-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.settings-btn:hover,
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.limit-info {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-left: 8px;
+}
+
+/* 警告スタイル */
+.warning-alert.danger {
+  background-color: #ff4444;
+  border-color: #cc0000;
+}
+
+.warning-alert.warning {
+  background-color: #ff9800;
+  border-color: #f57c00;
+}
+
+/* ギャンブルトラッカー */
+.gamble-tracker {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gamble-question h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.gamble-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-no-gamble {
+  background-color: #27ae60;
+  padding: 15px 30px;
+  font-size: 16px;
+}
+
+.btn-no-gamble:hover {
+  background-color: #219a52;
+}
+
+.btn-yes-gamble {
+  background-color: #e74c3c;
+  padding: 15px 30px;
+  font-size: 16px;
+}
+
+.btn-yes-gamble:hover {
+  background-color: #c0392b;
+}
+
+.gamble-success {
+  padding: 10px;
+}
+
+.streak-count {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.streak-label {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.gamble-relapse {
+  padding: 10px;
+}
+
+.streak-reset {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+/* 削除ボタン */
+.delete-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* 設定モーダル */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.settings-modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.settings-modal h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.settings-form small {
+  color: #7f8c8d;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.settings-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background-color: #95a5a6;
+}
+
+.btn-cancel:hover {
+  background-color: #7f8c8d;
+}
+
+.btn-save {
+  flex: 1;
+  background-color: #27ae60;
+}
+
+.btn-save:hover {
+  background-color: #219a52;
+}
+
+/* 認証画面 */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.toggle-btn {
+  margin-top: 15px;
+  background: none;
+  color: #3498db;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.toggle-btn:hover {
+  color: #2980b9;
+  background: none;
+}

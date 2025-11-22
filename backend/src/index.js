@@ -6,6 +6,8 @@ import { fileURLToPath } from 'url';
 import { testConnection } from './database.js';
 import expensesRouter from './routes/expenses.js';
 import authRouter from './routes/auth.js';
+import gambleRouter from './routes/gamble.js';
+import settingsRouter from './routes/settings.js';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ app.use(express.json());
 // APIルート
 app.use('/api/auth', authRouter);
 app.use('/api', expensesRouter);
+app.use('/api/gamble', gambleRouter);
+app.use('/api/settings', settingsRouter);
 
 // ヘルスチェック
 app.get('/health', (req, res) => {

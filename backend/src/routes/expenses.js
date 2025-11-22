@@ -93,7 +93,37 @@ router.get('/expenses', async (req, res) => {
   }
 });
 
-// 3. 今月のサマリー（合計 & カテゴリ別）
+// 3. 支出削除
+// DELETE /api/expenses/:id
+router.delete('/expenses/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { data, error } = await supabase
+      .from('expenses')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', req.user.userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    if (!data) {
+      return res.status(404).json({ error: '支出が見つかりません' });
+    }
+
+    res.json({ message: '削除しました', deleted: data });
+  } catch (error) {
+    console.error('支出削除エラー:', error);
+    res.status(500).json({
+      error: '支出の削除に失敗しました',
+      details: error.message
+    });
+  }
+});
+
+// 4. 今月のサマリー（合計 & カテゴリ別）
 // GET /api/summary?year=YYYY&month=MM
 router.get('/summary', async (req, res) => {
   try {

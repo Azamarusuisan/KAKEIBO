@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { createExpense, getExpenses, getSummary } from './api';
+import { createExpense, getExpenses, getSummary, deleteExpense, getSettings } from './api';
 import Auth from './components/Auth';
+import GambleTracker from './components/GambleTracker';
+import Settings from './components/Settings';
 
 // Chart.js の登録
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const LIMIT = 30000; // 上限金額
 const CATEGORIES = ['食費', '交際費', '交通費', '趣味', '固定費', 'その他'];
 
 function App() {
@@ -20,6 +21,13 @@ function App() {
   const [summary, setSummary] = useState({ total: 0, categories: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // 設定
+  const [settings, setSettings] = useState({
+    monthlyLimit: 30000,
+    warningThreshold: 25000
+  });
+  const [showSettings, setShowSettings] = useState(false);
 
   // フォーム入力
   const [formData, setFormData] = useState({
@@ -34,12 +42,17 @@ function App() {
     try {
       setLoading(true);
       setError(null);
-      const [expensesData, summaryData] = await Promise.all([
+      const [expensesData, summaryData, settingsData] = await Promise.all([
         getExpenses(year, month),
-        getSummary(year, month)
+        getSummary(year, month),
+        getSettings()
       ]);
       setExpenses(expensesData);
       setSummary(summaryData);
+      setSettings({
+        monthlyLimit: settingsData.monthly_limit,
+        warningThreshold: settingsData.warning_threshold
+      });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -105,8 +118,21 @@ function App() {
     }
   };
 
-  // 3万円超過チェック
-  const isOverLimit = summary.total >= LIMIT;
+  // 支出削除
+  const handleDelete = async (id) => {
+    if (!confirm('この支出を削除しますか？')) return;
+
+    try {
+      await deleteExpense(id);
+      await fetchData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  // 警告チェック
+  const isOverLimit = summary.total >= settings.monthlyLimit;
+  const isNearLimit = summary.total >= settings.warningThreshold && !isOverLimit;
 
   // グラフデータ
   const chartData = {
@@ -131,20 +157,37 @@ function App() {
       {/* ヘッダー */}
       <header className="header">
         <div className="header-top">
-          <h1>家計簿（上限3万円）</h1>
-          <button className="logout-btn" onClick={handleLogout}>
-            ログアウト
-          </button>
+          <h1>家計簿</h1>
+          <div className="header-buttons">
+            <button className="settings-btn" onClick={() => setShowSettings(true)}>
+              設定
+            </button>
+            <button className="logout-btn" onClick={handleLogout}>
+              ログアウト
+            </button>
+          </div>
         </div>
         <div className="header-info">
           {year}年 {month}月 合計：{summary.total.toLocaleString()}円
+          <span className="limit-info">
+            （上限 {settings.monthlyLimit.toLocaleString()}円）
+          </span>
         </div>
       </header>
 
+      {/* ギャンブルトラッカー */}
+      <GambleTracker />
+
       {/* 警告エリア */}
       {isOverLimit && (
-        <div className="warning-alert">
-          ⚠️ もうお金使ってはいけません！上限3万円を超えています。
+        <div className="warning-alert danger">
+          もうお金使ってはいけません！上限{settings.monthlyLimit.toLocaleString()}円を超えています。
+        </div>
+      )}
+      {isNearLimit && (
+        <div className="warning-alert warning">
+          カードを止めましょう！{settings.warningThreshold.toLocaleString()}円を超えました。
+          残り{(settings.monthlyLimit - summary.total).toLocaleString()}円です。
         </div>
       )}
 
@@ -251,6 +294,12 @@ function App() {
                     <span className="expense-memo">/ {expense.memo}</span>
                   )}
                 </div>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(expense.id)}
+                >
+                  削除
+                </button>
               </li>
             ))}
           </ul>
@@ -258,6 +307,14 @@ function App() {
           <div className="no-data">まだデータがありません。</div>
         )}
       </section>
+
+      {/* 設定モーダル */}
+      {showSettings && (
+        <Settings
+          onClose={() => setShowSettings(false)}
+          onUpdate={(newSettings) => setSettings(newSettings)}
+        />
+      )}
     </div>
   );
 }
