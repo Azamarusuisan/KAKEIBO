@@ -22,6 +22,15 @@ export default function GambleTracker() {
   };
 
   const handleCheckin = async (didGamble) => {
+    // 確認ダイアログ
+    if (didGamble) {
+      const confirmed = confirm('本当にギャンブルしましたか？\n\n間違いではありませんか？');
+      if (!confirmed) return;
+    } else {
+      const confirmed = confirm('本当にギャンブルしていませんか？\n\n正直に答えてください。');
+      if (!confirmed) return;
+    }
+
     setChecking(true);
     try {
       const result = await gambleCheckin(didGamble);
