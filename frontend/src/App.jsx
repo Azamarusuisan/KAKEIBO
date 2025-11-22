@@ -21,6 +21,7 @@ function App() {
   const [summary, setSummary] = useState({ total: 0, categories: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [authChecked, setAuthChecked] = useState(false);
 
   // 設定
   const [settings, setSettings] = useState({
@@ -63,9 +64,11 @@ function App() {
   // 初回ロード時にログイン状態をチェック
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
-    if (savedUser) {
+    const savedToken = localStorage.getItem('token');
+    if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
     }
+    setAuthChecked(true);
   }, []);
 
   useEffect(() => {
@@ -80,6 +83,11 @@ function App() {
     localStorage.removeItem('user');
     setUser(null);
   };
+
+  // 認証チェック中はローディング表示
+  if (!authChecked) {
+    return <div className="loading">読み込み中...</div>;
+  }
 
   // 未ログインの場合は認証画面を表示
   if (!user) {
