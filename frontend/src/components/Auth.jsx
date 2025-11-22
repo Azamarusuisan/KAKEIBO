@@ -19,7 +19,7 @@ export default function Auth({ onLogin }) {
         ? { email, password }
         : { email, password, name };
 
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}${endpoint}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE || ''}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
