@@ -1,332 +1,285 @@
-/* Googleカレンダー風デザイン */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
+/* Google Material Design 風 */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --primary: #1a73e8;
+  --primary-dark: #1557b0;
+  --on-primary: #fff;
+  --surface: #fff;
+  --background: #f8f9fa;
+  --on-surface: #202124;
+  --on-surface-variant: #5f6368;
+  --outline: #dadce0;
+  --error: #d93025;
+  --success: #1e8e3e;
+  --warning: #f9ab00;
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family: 'Google Sans', 'Roboto', sans-serif;
-  background-color: #fff;
-  color: #3c4043;
+  font-family: 'Google Sans', 'Roboto', -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--on-surface);
   font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* メインレイアウト */
+/* アプリコンテナ */
 .app {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--background);
 }
 
-/* ヘッダー - Googleカレンダー風トップバー */
+/* ヘッダー */
 .header {
-  background-color: #fff;
-  border-bottom: 1px solid #dadce0;
-  padding: 8px 16px;
+  background: var(--surface);
+  padding: 16px 20px;
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--outline);
 }
 
 .header-top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  height: 48px;
+  align-items: center;
 }
 
 .header h1 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
-  color: #5f6368;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.header h1::before {
-  content: "📅";
-  font-size: 24px;
+  color: var(--on-surface);
 }
 
 .header-buttons {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  gap: 4px;
 }
 
 .header-info {
+  margin-top: 12px;
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 8px 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
 }
 
-.header-info .month-display {
-  font-size: 22px;
+.header-info .total {
+  font-size: 32px;
   font-weight: 400;
-  color: #3c4043;
+  color: var(--on-surface);
 }
 
 .limit-info {
-  font-size: 12px;
-  color: #5f6368;
-  background: #f1f3f4;
-  padding: 4px 12px;
-  border-radius: 16px;
+  font-size: 13px;
+  color: var(--on-surface-variant);
 }
 
 /* ボタン共通 */
 button {
   font-family: 'Google Sans', 'Roboto', sans-serif;
-  border: none;
-  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
   cursor: pointer;
-  transition: all 0.2s;
-  padding: 8px 16px;
-}
-
-/* FAB風の登録ボタン */
-.fab-button {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
-  display: flex;
+  transition: all 0.2s ease;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  color: #1a73e8;
-  z-index: 1000;
+  gap: 8px;
 }
 
-.fab-button:hover {
-  box-shadow: 0 2px 6px 0 rgba(60,64,67,0.3), 0 6px 12px 4px rgba(60,64,67,0.15);
+button:active {
+  transform: scale(0.98);
 }
 
-/* ヘッダーボタン */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* アイコンボタン */
 .settings-btn,
 .logout-btn {
-  background: transparent;
-  color: #5f6368;
-  padding: 8px 12px;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font-size: 18px;
 }
 
 .settings-btn:hover,
 .logout-btn:hover {
-  background: #f1f3f4;
+  background: rgba(0,0,0,0.04);
 }
 
-.settings-btn::before {
-  content: "⚙️";
-}
-
-.logout-btn::before {
-  content: "🚪";
-}
-
-/* コンテンツエリア */
-.main-content {
-  flex: 1;
-  padding: 0 16px 80px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* ギャンブルトラッカー - Googleカレンダーのイベント風 */
+/* ギャンブルトラッカー */
 .gamble-tracker {
-  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
-  color: #fff;
-  padding: 20px 24px;
-  margin: 16px 0;
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary) 0%, #4285f4 100%);
+  margin: 16px;
+  padding: 24px 20px;
+  border-radius: 16px;
+  color: var(--on-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .gamble-question h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .gamble-buttons {
   display: flex;
   gap: 12px;
+  justify-content: center;
 }
 
 .btn-no-gamble {
-  background: #fff;
-  color: #1a73e8;
-  padding: 10px 24px;
-  font-weight: 500;
-}
-
-.btn-no-gamble:hover {
-  background: #f8f9fa;
+  background: var(--on-primary);
+  color: var(--primary);
+  flex: 1;
+  max-width: 160px;
 }
 
 .btn-yes-gamble {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  padding: 10px 24px;
-  border: 1px solid rgba(255,255,255,0.5);
-}
-
-.btn-yes-gamble:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
+  color: var(--on-primary);
+  border: 1px solid rgba(255,255,255,0.3);
+  flex: 1;
+  max-width: 160px;
 }
 
 .gamble-success {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  text-align: center;
 }
 
 .streak-count {
-  font-size: 48px;
-  font-weight: 400;
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 8px;
 }
 
 .streak-label {
-  font-size: 14px;
+  font-size: 16px;
   opacity: 0.9;
 }
 
 .gamble-relapse {
   text-align: center;
+  padding: 8px;
 }
 
-.streak-reset {
-  opacity: 0.8;
-  font-size: 13px;
-  margin-top: 8px;
-}
-
-/* 警告 - カレンダーの通知バー風 */
+/* 警告 */
 .warning-alert {
-  padding: 12px 16px;
-  margin: 16px 0;
-  border-radius: 4px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin: 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .warning-alert.danger {
   background: #fce8e6;
-  color: #d93025;
-  border-left: 4px solid #d93025;
+  color: var(--error);
 }
 
 .warning-alert.warning {
   background: #fef7e0;
-  color: #e37400;
-  border-left: 4px solid #f9ab00;
+  color: #b06000;
 }
 
 /* セクション */
 .section {
-  background: #fff;
-  margin: 16px 0;
+  background: var(--surface);
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
 
 .section h2 {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 500;
-  color: #5f6368;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  padding: 16px 0 8px;
-  border-bottom: 1px solid #e8eaed;
-  margin-bottom: 8px;
+  color: var(--on-surface);
+  margin-bottom: 16px;
 }
 
-/* 支出フォーム - カレンダーのイベント作成風 */
+/* フォーム */
 .expense-form {
-  background: #fff;
-  border: 1px solid #dadce0;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 16px 0;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .form-group label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  color: #5f6368;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  color: var(--on-surface-variant);
 }
 
 .form-group input,
 .form-group select {
-  padding: 12px;
-  border: 1px solid #dadce0;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  padding: 14px 16px;
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--on-surface);
   transition: border-color 0.2s;
+  -webkit-appearance: none;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #1a73e8;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
 }
 
 .expense-form button[type="submit"] {
-  background: #1a73e8;
-  color: #fff;
-  padding: 12px 24px;
-  margin-top: 16px;
-  width: auto;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-top: 8px;
 }
 
 .expense-form button[type="submit"]:hover:not(:disabled) {
-  background: #1557b0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.expense-form button[type="submit"]:disabled {
-  background: #dadce0;
-  color: #80868b;
+  background: var(--primary-dark);
 }
 
 /* グラフ */
 .chart-container {
-  max-width: 280px;
-  margin: 16px auto;
+  max-width: 240px;
+  margin: 0 auto;
 }
 
-/* 支出リスト - カレンダーの予定一覧風 */
+/* 支出リスト */
 .expense-list {
   list-style: none;
 }
@@ -334,155 +287,133 @@ button {
 .expense-item {
   display: flex;
   align-items: center;
-  padding: 12px 8px;
-  border-radius: 4px;
-  margin: 2px 0;
-  transition: background 0.2s;
+  padding: 14px 0;
+  gap: 12px;
+  border-bottom: 1px solid var(--outline);
 }
 
-.expense-item:hover {
-  background: #f1f3f4;
+.expense-item:last-child {
+  border-bottom: none;
 }
 
 .expense-date {
-  width: 80px;
   font-size: 12px;
-  color: #5f6368;
-  flex-shrink: 0;
+  color: var(--on-surface-variant);
+  min-width: 50px;
 }
 
 .expense-category {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  margin-right: 12px;
   flex-shrink: 0;
 }
 
-/* カテゴリ別カラー */
-.expense-item[data-category="食費"] .expense-category,
+/* カテゴリカラー */
 .expense-category.食費 { background: #1a73e8; }
-.expense-item[data-category="交際費"] .expense-category,
 .expense-category.交際費 { background: #ea4335; }
-.expense-item[data-category="交通費"] .expense-category,
 .expense-category.交通費 { background: #34a853; }
-.expense-item[data-category="趣味"] .expense-category,
 .expense-category.趣味 { background: #fbbc04; }
-.expense-item[data-category="固定費"] .expense-category,
 .expense-category.固定費 { background: #9334e6; }
-.expense-item[data-category="その他"] .expense-category,
 .expense-category.その他 { background: #5f6368; }
 
 .expense-info {
   flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   min-width: 0;
 }
 
 .expense-category-name {
   font-size: 14px;
-  color: #3c4043;
   font-weight: 500;
+  color: var(--on-surface);
 }
 
 .expense-memo {
-  font-size: 13px;
-  color: #5f6368;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .expense-amount {
-  font-size: 14px;
-  color: #3c4043;
+  font-size: 15px;
   font-weight: 500;
-  margin-left: auto;
-  padding-right: 8px;
+  color: var(--on-surface);
+  white-space: nowrap;
 }
 
 .delete-btn {
-  background: transparent;
-  color: #5f6368;
-  padding: 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.expense-item:hover .delete-btn {
-  opacity: 1;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font-size: 16px;
+  opacity: 0.6;
 }
 
 .delete-btn:hover {
   background: #fce8e6;
-  color: #d93025;
+  color: var(--error);
+  opacity: 1;
 }
 
 /* 設定モーダル */
 .settings-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  padding: 20px;
+  z-index: 1000;
 }
 
 .settings-modal {
-  background: #fff;
-  border-radius: 8px;
+  background: var(--surface);
+  border-radius: 16px;
   padding: 24px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .settings-modal h2 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
-  margin-bottom: 20px;
-  color: #3c4043;
+  margin-bottom: 24px;
 }
 
 .settings-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .settings-form small {
   font-size: 12px;
-  color: #5f6368;
-  margin-top: 4px;
+  color: var(--on-surface-variant);
 }
 
 .settings-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .btn-cancel {
   background: transparent;
-  color: #1a73e8;
-}
-
-.btn-cancel:hover {
-  background: #f1f3f4;
+  color: var(--primary);
 }
 
 .btn-save {
-  background: #1a73e8;
-  color: #fff;
-}
-
-.btn-save:hover {
-  background: #1557b0;
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 /* 認証画面 */
@@ -491,16 +422,17 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  padding: 24px;
+  background: var(--background);
 }
 
 .auth-card {
-  background: #fff;
-  padding: 48px 40px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: var(--surface);
+  padding: 40px 32px;
+  border-radius: 16px;
   width: 100%;
   max-width: 400px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
 .auth-title {
@@ -508,12 +440,11 @@ button {
   font-weight: 400;
   text-align: center;
   margin-bottom: 8px;
-  color: #202124;
 }
 
 .auth-subtitle {
   font-size: 14px;
-  color: #5f6368;
+  color: var(--on-surface-variant);
   text-align: center;
   margin-bottom: 32px;
 }
@@ -521,66 +452,83 @@ button {
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .auth-form button[type="submit"] {
-  background: #1a73e8;
-  color: #fff;
-  padding: 12px;
-  margin-top: 16px;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 8px;
 }
 
 .toggle-btn {
-  background: none;
-  color: #1a73e8;
-  margin-top: 16px;
-}
-
-.toggle-btn:hover {
-  text-decoration: underline;
+  background: transparent;
+  color: var(--primary);
+  margin-top: 8px;
 }
 
 /* エラー・ローディング */
 .error {
   background: #fce8e6;
-  color: #d93025;
-  padding: 12px 16px;
-  border-radius: 4px;
-  margin: 16px 0;
+  color: var(--error);
+  padding: 16px;
+  margin: 16px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .loading,
 .no-data {
   text-align: center;
   padding: 32px;
-  color: #5f6368;
+  color: var(--on-surface-variant);
 }
 
 /* レスポンシブ */
-@media (max-width: 600px) {
+@media (min-width: 600px) {
+  .app {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+
+  .header {
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 400px) {
   .header h1 {
     font-size: 18px;
   }
 
-  .expense-form {
-    padding: 16px;
-  }
-
-  .expense-item {
-    flex-wrap: wrap;
-  }
-
-  .expense-date {
-    width: 100%;
-    margin-bottom: 4px;
+  .header-info .total {
+    font-size: 28px;
   }
 
   .gamble-buttons {
     flex-direction: column;
   }
 
+  .btn-no-gamble,
+  .btn-yes-gamble {
+    max-width: 100%;
+  }
+
   .streak-count {
-    font-size: 36px;
+    font-size: 48px;
+  }
+
+  .section {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  .expense-item {
+    flex-wrap: wrap;
   }
 }
