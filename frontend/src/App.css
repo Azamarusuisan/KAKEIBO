@@ -667,3 +667,250 @@ button:disabled {
     padding: 24px 20px;
   }
 }
+
+/* ウィッシュリストセクション */
+.wishlist-section {
+  margin: 16px;
+}
+
+/* 祝福バナー */
+.congrats-banner {
+  background: linear-gradient(145deg, #34a853 0%, #81c995 100%);
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.congrats-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.congrats-sub {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* ブランドリンク */
+.brand-links {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.brand-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.brand-link.vuitton {
+  background: linear-gradient(145deg, #3d2c1e 0%, #5c4433 100%);
+  color: #d4af37;
+}
+
+.brand-link.prada {
+  background: linear-gradient(145deg, #1a1a1a 0%, #333 100%);
+  color: #fff;
+}
+
+.brand-link:active {
+  transform: scale(0.96);
+}
+
+/* ウィッシュリストカード */
+.wishlist-card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: var(--radius-md);
+}
+
+.wishlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.wishlist-header h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.add-wishlist-btn {
+  background: var(--primary);
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+}
+
+/* ウィッシュリストフォーム */
+.wishlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--outline);
+}
+
+.wishlist-form input {
+  padding: 14px 16px;
+  border: 1.5px solid var(--outline);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--on-surface);
+  transition: all 0.2s;
+}
+
+.wishlist-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface-container);
+}
+
+.wishlist-form input::placeholder {
+  color: var(--on-surface-dim);
+}
+
+.submit-wishlist-btn {
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 24px;
+  font-weight: 500;
+}
+
+/* ウィッシュリストアイテム */
+.wishlist-items {
+  list-style: none;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--outline);
+}
+
+.wishlist-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.wishlist-item:first-child {
+  padding-top: 0;
+}
+
+.wishlist-image {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.wishlist-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wishlist-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--on-surface);
+}
+
+.wishlist-amount {
+  font-size: 0.8125rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.wishlist-memo {
+  font-size: 0.75rem;
+  color: var(--on-surface-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.wishlist-link-btn {
+  background: var(--surface-container);
+  color: var(--primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.wishlist-link-btn:active {
+  background: var(--outline);
+}
+
+.wishlist-delete-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-surface-dim);
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.wishlist-delete-btn:active {
+  background: rgba(242,139,130,0.2);
+  color: var(--error);
+  opacity: 1;
+}
+
+.wishlist-empty {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--on-surface-dim);
+  font-size: 0.9375rem;
+}
+
+/* 小さい画面でのウィッシュリスト調整 */
+@media (max-width: 360px) {
+  .wishlist-section {
+    margin: 12px;
+  }
+
+  .brand-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wishlist-image {
+    width: 48px;
+    height: 48px;
+  }
+}

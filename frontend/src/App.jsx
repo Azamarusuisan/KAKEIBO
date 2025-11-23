@@ -5,6 +5,7 @@ import { createExpense, getExpenses, getSummary, deleteExpense, getSettings } fr
 import Auth from './components/Auth';
 import GambleTracker from './components/GambleTracker';
 import Settings from './components/Settings';
+import WishlistBanner from './components/WishlistBanner';
 
 // Chart.js の登録
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -29,6 +30,9 @@ function App() {
     warningThreshold: 25000
   });
   const [showSettings, setShowSettings] = useState(false);
+
+  // ギャンブルストリーク
+  const [gambleStreak, setGambleStreak] = useState(0);
 
   // フォーム入力
   const [formData, setFormData] = useState({
@@ -188,7 +192,10 @@ function App() {
       </div>
 
       {/* ギャンブルトラッカー */}
-      <GambleTracker />
+      <GambleTracker onStreakChange={setGambleStreak} />
+
+      {/* 欲しいものバナー */}
+      <WishlistBanner gambleStreak={gambleStreak} />
 
       {/* 警告エリア */}
       {isOverLimit && (

@@ -126,3 +126,60 @@ export async function updateSettings(settings) {
 
   return response.json();
 }
+
+// ウィッシュリスト: 取得
+export async function getWishlist() {
+  const response = await fetch(`${API_BASE}/api/wishlist`, {
+    headers: getAuthHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error('ウィッシュリストの取得に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ウィッシュリスト: 追加
+export async function addWishlistItem(item) {
+  const response = await fetch(`${API_BASE}/api/wishlist`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(item)
+  });
+
+  if (!response.ok) {
+    throw new Error('追加に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ウィッシュリスト: 更新
+export async function updateWishlistItem(id, item) {
+  const response = await fetch(`${API_BASE}/api/wishlist/${id}`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(item)
+  });
+
+  if (!response.ok) {
+    throw new Error('更新に失敗しました');
+  }
+
+  return response.json();
+}
+
+// ウィッシュリスト: 削除
+export async function deleteWishlistItem(id) {
+  const response = await fetch(`${API_BASE}/api/wishlist/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders()
+  });
+
+  if (!response.ok) {
+    throw new Error('削除に失敗しました');
+  }
+
+  return response.json();
+}

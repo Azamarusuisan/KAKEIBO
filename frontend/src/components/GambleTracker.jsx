@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getGambleStatus, gambleCheckin } from '../api';
 
-export default function GambleTracker() {
+export default function GambleTracker({ onStreakChange }) {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [checking, setChecking] = useState(false);
@@ -14,6 +14,9 @@ export default function GambleTracker() {
     try {
       const data = await getGambleStatus();
       setStatus(data);
+      if (onStreakChange && data?.streak) {
+        onStreakChange(data.streak);
+      }
     } catch (error) {
       console.error('ステータス取得エラー:', error);
     } finally {
@@ -39,6 +42,9 @@ export default function GambleTracker() {
         didGambleToday: didGamble,
         streak: result.streak
       });
+      if (onStreakChange) {
+        onStreakChange(result.streak);
+      }
     } catch (error) {
       alert('チェックインに失敗しました');
     } finally {
